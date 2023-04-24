@@ -1,4 +1,13 @@
 const container = document.getElementById("grid-container");
+let slider = document.getElementById('slider')
+let output = document.getElementById('grid-size')
+output.innerHTML = slider.value + "x" + slider.value
+
+let sliderValue = slider.value
+
+slider.oninput = function () {
+    output.innerHTML = this.value + "x" + this.value
+}
 
 function makeRows(rows, cols) {
   container.style.setProperty('--grid-rows', rows);
@@ -9,4 +18,4 @@ function makeRows(rows, cols) {
   };
 };
 
-makeRows(100, 100);
+makeRows(sliderValue, sliderValue);

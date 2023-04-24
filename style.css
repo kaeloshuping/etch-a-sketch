@@ -4,15 +4,42 @@ html, body {
     place-items: center;
 }
 
+#main-container {
+    width: 800px;
+    height: 600px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#header {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+
 #grid-container {
     background-color: burlywood;
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
+    padding: 20px;
 }
 
 .grid-item {
     border: 1px solid #858484;
+}
+
+#slider {
+    width: 50%;
+    padding: 10px;
+}
+
+.slider-text {
+    font-size: 20px;
+    padding-top: 10px;
 }
