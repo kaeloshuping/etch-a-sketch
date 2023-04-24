@@ -1,15 +1,12 @@
+const container = document.getElementById("grid-container");
+
 function makeRows(rows, cols) {
-    let gridContainer = document.getElementById('grid-container');
-    // gridContainer.style.setProperty('--grid-rows', rows);
-    // gridContainer.style.setProperty('--grid-cols', cols);
-    for (let i = 0; i < (rows * cols); i++) {
-        let cell = document.createElement('div');
-        cell.style.borderStyle = 'solid'
-        cell.style.borderWidth = '1px'
-        cell.style.width = '10px'
-        cell.style.height = '10px'
-        gridContainer.appendChild(cell).className = "gridCell";
-    };
+  container.style.setProperty('--grid-rows', rows);
+  container.style.setProperty('--grid-cols', cols);
+  for (c = 0; c < (rows * cols); c++) {
+    let cell = document.createElement("div");
+    container.appendChild(cell).className = "grid-item";
+  };
 };
 
-makeRows(50, 50)
+makeRows(100, 100);
