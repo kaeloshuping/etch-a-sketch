@@ -5,11 +5,14 @@ html, body {
 }
 
 #grid-container {
+    background-color: burlywood;
+    display: grid;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
     width: 500px;
     height: 500px;
-    background-color: burlywood;
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 1;
 }
 
+.grid-item {
+    border: 1px solid #858484;
+}
