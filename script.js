@@ -16,6 +16,9 @@ function makeRows(rows, cols) {
   for (c = 0; c < (rows * cols); c++) {
     let cell = document.createElement("div");
     cell.id = "grid-item";
+    cell.addEventListener('mouseover', () => {
+      draw(cell, 'red')
+    })
     gridContainer.appendChild(cell).className = "grid-item";
   };
 };
@@ -34,3 +37,9 @@ function removeAllChildNodes(parent) {
     parent.removeChild(parent.firstChild);
   };
 };
+
+// this function takes a gridItem and a background colour as parameters and 
+// changes the colour of the cell to the background colour
+function draw(cell, colour) {
+  cell.style.backgroundColor = colour
+}
