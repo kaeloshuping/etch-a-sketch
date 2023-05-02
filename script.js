@@ -10,7 +10,7 @@ slider.oninput = function () {
 
 // this functions takes 2 variables,  one for the number of rows and one for the 
 // number of columns and draws a grid
-function makeRows(rows, cols) {
+function drawGrid(rows, cols) {
   gridContainer.style.setProperty('--grid-rows', rows);
   gridContainer.style.setProperty('--grid-cols', cols);
   for (c = 0; c < (rows * cols); c++) {
@@ -28,7 +28,7 @@ function makeRows(rows, cols) {
 gridUpdate.addEventListener('click', function () {
   removeAllChildNodes(gridContainer);
   let sliderValue = slider.value;
-  makeRows(sliderValue, sliderValue);
+  drawGrid(sliderValue, sliderValue);
 });
 
 // this function removes all child nodes fo a given element
