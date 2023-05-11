@@ -45,15 +45,29 @@ html, body {
     padding-top: 10px;
 }
 
+#button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.color-picker-text {
+    font-size: 18px;
+}
+
+/* #color-picker {
+    padding-top: 10px;
+} */
+
 #update-grid {
     padding: 15px;
-    border: 1px solid rgb(1, 115, 190);
+    border: 1px solid #568de0;
     border-radius: 15px;
     background-color: white;
     color: black;
 }
 
 #update-grid:hover {
-    background-color: rgb(1, 115, 190);
+    background-color: #3484fc;
     color: white;
 }
