@@ -2,7 +2,9 @@ const gridContainer = document.getElementById("grid-container");
 let slider = document.getElementById('slider');
 let output = document.getElementById('grid-size');
 let gridUpdate = document.getElementById('update-grid');
-let color = document.getElementById('color-picker').value;
+// let color = document.getElementById('color-picker').value;
+let color = "";
+let userColor = document.getElementById('color-picker')
 output.innerHTML = slider.value + "x" + slider.value;
 
 slider.oninput = function () {
@@ -42,5 +44,13 @@ function removeAllChildNodes(parent) {
 // this function takes a gridItem and a background colour as parameters and 
 // changes the colour of the cell to the background colour
 function draw(cell, colour) {
-  cell.style.backgroundColor = colour
-}
+  cell.style.backgroundColor = colour;
+};
+
+// this function gets the value of the colour picker and changes the value of the 
+// "color" variable
+const colour = function () {
+  color = userColor.value;
+};
+
+userColor.addEventListener('change', colour);
