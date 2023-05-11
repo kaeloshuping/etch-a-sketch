@@ -2,6 +2,7 @@ const gridContainer = document.getElementById("grid-container");
 let slider = document.getElementById('slider');
 let output = document.getElementById('grid-size');
 let gridUpdate = document.getElementById('update-grid');
+let color = document.getElementById('color-picker').value;
 output.innerHTML = slider.value + "x" + slider.value;
 
 slider.oninput = function () {
@@ -17,8 +18,8 @@ function drawGrid(rows, cols) {
     let cell = document.createElement("div");
     cell.id = "grid-item";
     cell.addEventListener('mouseover', () => {
-      draw(cell, 'red')
-    })
+      draw(cell, color);
+    });
     gridContainer.appendChild(cell).className = "grid-item";
   };
 };
