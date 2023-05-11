@@ -2,9 +2,10 @@ const gridContainer = document.getElementById("grid-container");
 let slider = document.getElementById('slider');
 let output = document.getElementById('grid-size');
 let gridUpdate = document.getElementById('update-grid');
-// let color = document.getElementById('color-picker').value;
 let color = "";
-let userColor = document.getElementById('color-picker')
+let userColor = document.getElementById('color-picker');
+let eraser = document.getElementById('eraser');
+let eraserState = false;
 output.innerHTML = slider.value + "x" + slider.value;
 
 slider.oninput = function () {
@@ -54,3 +55,34 @@ const colour = function () {
 };
 
 userColor.addEventListener('change', colour);
+
+function toggleEraser (state) {
+  if (state) {
+    resetButton(eraser);
+    eraserState = false;
+    return eraserState;
+  }
+
+  else {
+    colorButton(eraser)
+    eraserState = true; 
+    return eraserState;
+  }; 
+};
+
+function resetButton (button) {
+  button.style.backgroundColor = 'white';
+  button.style.padding = '15px';
+  button.style.borderRadius = '15px';
+  button.style.color = 'black';
+};
+
+function colorButton (button) {
+  button.style.backgroundColor = '#565e69';
+  button.style.color = 'white';
+  button.style.border = '1px solid white';
+}
+
+eraser.addEventListener('click', () => {
+  toggleEraser(eraserState);
+});
