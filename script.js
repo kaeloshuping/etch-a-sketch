@@ -56,6 +56,8 @@ const colour = function () {
 
 userColor.addEventListener('change', colour);
 
+// this fuction takes the state of the eraser as a parameter and toggles it to 
+// an opposite state
 function toggleEraser (state) {
   if (state) {
     resetButton(eraser);
@@ -70,6 +72,8 @@ function toggleEraser (state) {
   }; 
 };
 
+// this function takes a button as a parameter and resets it's CSS Properties 
+// to the default button
 function resetButton (button) {
   button.style.backgroundColor = 'white';
   button.style.padding = '15px';
@@ -77,12 +81,15 @@ function resetButton (button) {
   button.style.color = 'black';
 };
 
+// this function takes a button as a parameter and changes it's CSS Properties 
+// to the state of an active button
 function colorButton (button) {
   button.style.backgroundColor = '#565e69';
   button.style.color = 'white';
   button.style.border = '1px solid white';
 }
 
+// this event listener, listens for a click event and toggles the condition of the eraser
 eraser.addEventListener('click', () => {
   toggleEraser(eraserState);
 });
