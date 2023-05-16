@@ -2,8 +2,10 @@ const gridContainer = document.getElementById("grid-container");
 let slider = document.getElementById('slider');
 let output = document.getElementById('grid-size');
 let gridUpdate = document.getElementById('update-grid');
+let colorPickerBtn = document.getElementById('colorPicker');
+let colorPicker = document.createElement('input');
+colorPicker.type = 'color'
 let color = "";
-let userColor = document.getElementById('color-picker');
 let eraser = document.getElementById('eraser');
 let eraserState = false;
 output.innerHTML = slider.value + "x" + slider.value;
@@ -11,6 +13,14 @@ output.innerHTML = slider.value + "x" + slider.value;
 slider.oninput = function () {
     output.innerHTML = this.value + "x" + this.value;
 };
+
+colorPickerBtn.addEventListener('click', () => {
+  colorPicker.click();
+});
+
+colorPicker.addEventListener('change', () => {
+  color = colorPicker.value;
+});
 
 // this functions takes 2 variables,  one for the number of rows and one for the 
 // number of columns and draws a grid
@@ -58,10 +68,8 @@ function draw(cell, colour) {
 // this function gets the value of the colour picker and changes the value of the 
 // "color" variable
 const colour = function () {
-  color = userColor.value;
+  color = colorPicker.value;
 };
-
-userColor.addEventListener('change', colour);
 
 // this fuction takes the state of the eraser as a parameter and toggles it to 
 // an opposite state
