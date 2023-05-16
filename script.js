@@ -21,7 +21,14 @@ function drawGrid(rows, cols) {
     let cell = document.createElement("div");
     cell.id = "grid-item";
     cell.addEventListener('mouseover', () => {
-      draw(cell, color);
+      if (eraserState == true) {
+        color = 'burlywood';
+        draw(cell, color);
+      } 
+      else {
+        colour();
+        draw(cell, color);
+      };
     });
     gridContainer.appendChild(cell).className = "grid-item";
   };
@@ -97,18 +104,10 @@ eraser.addEventListener('click', () => {
 // this function takes the state of a button as well as a button 
 // and creates a hover effect on selected button
 function hoverButton(button) {
-  // if (state) {
-  //   button.style.backgroundColor = 'white';
-  //   button.style.padding = '15px';
-  //   button.style.borderRadius = '15px';
-  //   button.style.color = 'black';
-  // }
-
-  
-  colorButton(button)
-  
+  colorButton(button);
 };
 
+// checks whether eraser is in a "false" condition and applies hover effect
 if (eraserState == false) {
   eraser.addEventListener('mouseover', () => {
     hoverButton(eraser);
@@ -116,10 +115,7 @@ if (eraserState == false) {
   
   eraser.addEventListener('mouseleave', () => {
     if (eraserState == false) {
-      eraser.style.backgroundColor = 'white';
-      eraser.style.padding = '15px';
-      eraser.style.borderRadius = '15px';
-      eraser.style.color = 'black';
+      resetButton(eraser);
     };
   });
 };
