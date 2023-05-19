@@ -5,14 +5,24 @@ let gridUpdate = document.getElementById('update-grid');
 let colorPickerBtn = document.getElementById('colorPicker');
 let colorPicker = document.createElement('input');
 colorPicker.type = 'color'
+let backgroundColorPicker = document.createElement('input');
+backgroundColorPicker.type = 'color'
 let color = "";
 let eraser = document.getElementById('eraser');
 let eraserState = false;
+let backgroundColorBtn = document.getElementById('backgroundColor');
+let gridBackgroundColor = 'white';
 output.innerHTML = slider.value + "x" + slider.value;
 
 slider.oninput = function () {
     output.innerHTML = this.value + "x" + this.value;
 };
+
+function defaultGrid () {
+  drawGrid(20, 20);
+};
+
+defaultGrid()
 
 colorPickerBtn.addEventListener('click', () => {
   colorPicker.click();
@@ -32,7 +42,7 @@ function drawGrid(rows, cols) {
     cell.id = "grid-item";
     cell.addEventListener('mouseover', () => {
       if (eraserState == true) {
-        color = 'burlywood';
+        color = gridBackgroundColor;
         draw(cell, color);
       } 
       else {
@@ -127,3 +137,21 @@ if (eraserState == false) {
     };
   });
 };
+
+// this function changes the background colour of the grid
+function changeBackgroundColor() {
+  gridContainer.style.backgroundColor = gridBackgroundColor;
+};
+
+// this event listener listens for a "click" event on the "Background Colour" button 
+// and triggers the colour picker
+backgroundColorBtn.addEventListener('click', () => {
+  backgroundColorPicker.click();
+});
+
+// this event listener listens for a change in value of the background colour picker 
+// and sets the background colour of the grid accordingly
+backgroundColorPicker.addEventListener('change', () => {
+  gridBackgroundColor = backgroundColorPicker.value;
+  changeBackgroundColor();
+});
