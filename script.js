@@ -9,7 +9,9 @@ let backgroundColorPicker = document.createElement('input');
 backgroundColorPicker.type = 'color'
 let color = "";
 let eraser = document.getElementById('eraser');
-let eraserState = false;
+let toggleGridBtn = document.getElementById('toggleGrid');
+let eraserbuttonState = false;
+let toggleGridBtnState = false;
 let backgroundColorBtn = document.getElementById('backgroundColor');
 let gridBackgroundColor = 'white';
 output.innerHTML = slider.value + "x" + slider.value;
@@ -18,16 +20,21 @@ slider.oninput = function () {
     output.innerHTML = this.value + "x" + this.value;
 };
 
+// this function draws a 16 x 16 default grid
 function defaultGrid () {
-  drawGrid(20, 20);
+  drawGrid(16, 16);
 };
 
 defaultGrid()
 
+// this event listener listens for the "Pen Color" button to be clicked 
+// and brings up the colour picker
 colorPickerBtn.addEventListener('click', () => {
   colorPicker.click();
 });
 
+// this listener listens for a change in the value of the colour picker 
+// and assigns said value to the "color" variable
 colorPicker.addEventListener('change', () => {
   color = colorPicker.value;
 });
@@ -41,7 +48,7 @@ function drawGrid(rows, cols) {
     let cell = document.createElement("div");
     cell.id = "grid-item";
     cell.addEventListener('mouseover', () => {
-      if (eraserState == true) {
+      if (eraserbuttonState == true) {
         color = gridBackgroundColor;
         draw(cell, color);
       } 
@@ -60,6 +67,7 @@ gridUpdate.addEventListener('click', function () {
   removeAllChildNodes(gridContainer);
   let sliderValue = slider.value;
   drawGrid(sliderValue, sliderValue);
+  toggleGrid();
 });
 
 // this function removes all child nodes fo a given element
@@ -83,17 +91,17 @@ const colour = function () {
 
 // this fuction takes the state of the eraser as a parameter and toggles it to 
 // an opposite state
-function toggleEraser (state) {
+function toggleButton (button, state) {
   if (state) {
-    resetButton(eraser);
-    eraserState = false;
-    return eraserState;
+    resetButton(button);
+    state = false;
+    return state;
   }
 
   else {
-    colorButton(eraser)
-    eraserState = true; 
-    return eraserState;
+    colorButton(button);
+    state = true; 
+    return state;
   }; 
 };
 
@@ -114,29 +122,68 @@ function colorButton (button) {
   button.style.border = '1px solid white';
 };
 
-// this event listener, listens for a click event and toggles the condition of the eraser
+// this event listener, listens for a click event 
+// and toggles the condition of the eraser
 eraser.addEventListener('click', () => {
-  toggleEraser(eraserState);
+  toggleButton(eraser, eraserbuttonState);
+  if (eraserbuttonState == false) {
+    eraserbuttonState = true;
+  }
+
+  else {
+    eraserbuttonState = false;
+  };
 });
 
-// this function takes the state of a button as well as a button 
-// and creates a hover effect on selected button
-function hoverButton(button) {
-  colorButton(button);
+// this listener listens for when the "toggle grid" button gets clicked 
+// and toggles the button condition
+toggleGridBtn.addEventListener('click', () => {
+  toggleButton(toggleGridBtn, toggleGridBtnState);
+  if (toggleGridBtnState == false) {
+    toggleGridBtnState = true;
+    toggleGrid();
+    return toggleGridBtnState
+  }
+
+  else {
+    toggleGridBtnState = false;
+    toggleGrid();
+  };
+});
+
+// this function applies the hover effect to the eraser button when eraser is off
+function hoverEraser() {
+  if (eraserbuttonState == false) {
+    eraser.addEventListener('mouseover', () => {
+      colorButton(eraser);
+    });
+    
+    eraser.addEventListener('mouseleave', () => {
+      if (eraserbuttonState == false) {
+        resetButton(eraser);
+      };
+    });
+  };
 };
 
-// checks whether eraser is in a "false" condition and applies hover effect
-if (eraserState == false) {
-  eraser.addEventListener('mouseover', () => {
-    hoverButton(eraser);
-  });
-  
-  eraser.addEventListener('mouseleave', () => {
-    if (eraserState == false) {
-      resetButton(eraser);
-    };
-  });
+// this function applies the hover effect to the toggle grid button 
+// when the grid is visible
+function hoverToggleGrid() {
+  if (toggleGridBtnState == false) {
+    toggleGridBtn.addEventListener('mouseover', () => {
+      colorButton(toggleGridBtn);
+    });
+    
+    toggleGridBtn.addEventListener('mouseleave', () => {
+      if (toggleGridBtnState == false) {
+        resetButton(toggleGridBtn);
+      };
+    });
+  };
 };
+
+hoverEraser();
+hoverToggleGrid();
 
 // this function changes the background colour of the grid
 function changeBackgroundColor() {
@@ -154,4 +201,26 @@ backgroundColorBtn.addEventListener('click', () => {
 backgroundColorPicker.addEventListener('change', () => {
   gridBackgroundColor = backgroundColorPicker.value;
   changeBackgroundColor();
+  toggleGrid();
 });
+
+// this function applies the toggle effect on the "toggle grid" button
+function toggleGrid() {
+  if (toggleGridBtnState == true) {
+    let gridItem = document.querySelectorAll('#grid-item');
+    gridItem.forEach((gridItem) => {
+      gridItem.style.borderStyle = 'solid';
+      gridItem.style.borderWidth = '1px';
+      gridItem.style.borderColor = gridBackgroundColor;
+    });
+  }
+
+  else {
+    let gridItem = document.querySelectorAll('#grid-item');
+    gridItem.forEach((gridItem) => {
+      gridItem.style.borderStyle = 'solid';
+      gridItem.style.borderWidth = '1px';
+      gridItem.style.borderColor = '#858484';
+    });
+  };
+};
