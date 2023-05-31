@@ -1,12 +1,13 @@
 html, body {
     height: 100%;
+    width: 100%;
     display: grid;
     place-items: center;
     background-color: rgb(133, 133, 133);
 }
 
 #main-container {
-    width: 800px;
+    width: 70%;
     height: 600px;
     background-color: rgb(133, 133, 133);
     display: flex;
